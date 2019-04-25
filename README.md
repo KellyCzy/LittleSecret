@@ -1,2 +1,2 @@
 # LittleScret
-See friend's posts anonymously. For Hack Challenge
+See friend's anonymous posts. For Hack Challenge
