@@ -1,0 +1,110 @@
+@app.route('/register/', methods=['POST'])
+def register_account():
+    post_body:{
+        "email": <email address>
+        "password": <password>
+    } 
+    response:{
+        session_token(iOS don't need to implement)
+    }
+
+@app.route('/login/', methods=['POST'])
+def log_in():
+    post_body:{
+        "email": <email address>
+        "password": <password>
+    }
+    response:{
+        "user_id": <a unique integer>
+    } 
+
+@app.route('/friend/request/<int:requester_id>/<int:requested_id>/', methods=['POST'])
+friend_request(requester_id, requested_id):
+    response:{
+        'requester'(Int): <user_id who send a frend request>,
+        'requested'(int): <user_id who receives a friend request>,
+        'action_user'(Int): <user_id who lastly performs an action (eg. send the request)>,
+        'status': 'pending'
+    }
+
+@app.route('/friend/accept/<int:requester_id>/<int:requested_id>/', methods=['POST'])
+def friend_accept(requester_id, requested_id):
+    response:{
+        'requester'(Int): <user_id who send a frend request>,
+        'requested'(Int): <user_id who receives a friend request>,
+        'action_user'(Int): <user_id who lastly performs an action (eg. send the request)>,
+        'status': 'accepted'
+    }
+
+@app.route('/friend/decline/<int:requester_id>/<int:requested_id>/', methods=['POST'])
+def friend_decline(requester_id, requested_id):
+    response:{
+        'requester'(Int): <user_id who send a frend request>,
+        'requested'(Int): <user_id who receives a friend request>,
+        'action_user'(Int): <user_id who lastly performs an action (eg. send the request)>,
+        'status': 'declined'
+    }
+
+@app.route('/friend/list/<int:user_id>/')
+def get_friend_list(user_id):
+    response:{
+        'user_id': [friend_list]
+    }
+
+@app.route('/posts/<int:user>/')
+def get_user_posts(user):
+    response:{
+        'success': True, 
+        'data': [posts]
+    }
+
+@app.route('/posts/<int:user>/', methods=['POST'])
+def create_post(user):
+    post_body:{
+        'text': <post content>
+    }
+    response:{
+        'success': True, 
+        'data': <post>
+    }
+
+@app.route('/posts/<int:post>/', methods=['DELETE'])
+def delete_post(post):
+    response:{
+        'success': True, 
+        'data': <post>
+    }
+
+@app.route('/friend/posts/<int:user_id>/')
+def get_friend_posts(user_id):
+    response:{
+        'success': True, 
+        'data': [posts]
+    }
+
+@app.route('/comments/<int:user_id>/', methods=['POST'])
+def create_comment(user_id):
+    post_body:{
+        'text': <comment body>
+    }
+    response:{
+        'success': True, 
+        'data': <comment>
+    }
+
+@app.route('/comments/<int:comment_id>/', methods=['DELETE'])
+def delete_comment(comment_id):
+    response:{
+        'success': True, 
+        'data': <comment>
+    }
+
+@app.route('/comments/<int:user>/')
+def get_user_comments(user_id):
+     response:{
+        'success': True, 
+        'data': [posts]
+    }
+
+
+    

@@ -165,7 +165,7 @@ def friend_decline(requester_id, requested_id):
 @app.route('/friend/list/<int:user_id>/')
 def get_friend_list(user_id):
     friend_list = user_dao.friend_list(user_id)
-    return json.dumps({'friends_id': friend_list})
+    return json.dumps({'user_id': friend_list})
 
 @app.route('/posts/<int:user>/')
 def get_user_posts(user):
@@ -210,20 +210,19 @@ def get_friend_posts(user_id):
     return json.dumps({'success': True, 'data': [post.serialize() for post in posts]})
 
 
-@app.route('/post/comment/<int:user_id>/<int:post_id>/', methods=['POST'])
-def create_comment(user_id, post_id):
+@app.route('/post/comment/<int:user_id>/', methods=['POST'])
+def create_comment(user_id):
     pass
 
-@app.route('/post/comment/<int:user_id>/<int:post_id>/', methods=['DELETE'])
-def delete_comment(user_id, post_id):
+@app.route('/post/comment/<int:comment_id>/', methods=['DELETE'])
+def delete_comment(comment_id):
     pass
 
-def get_post_comments(post_id):
-    pass
 
 def get_user_comments(user_id):
     pass
 
+# like system
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
