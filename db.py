@@ -78,7 +78,7 @@ class Post(db.Model):
         return{
             'id': self.id,
             'text': self.text,
-            # 'comments':
+            'comments': [comment.serialize() for comment in self.comments]
         }
 
 class Comment(db.Model):
@@ -97,6 +97,7 @@ class Comment(db.Model):
         return{
             'id': self.id,
             'text': self.text,
+            'post_id': self.post_id
         }
 
 

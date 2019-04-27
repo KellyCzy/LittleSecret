@@ -50,7 +50,8 @@ def register_account():
     return json.dumps({
         'session_token': user.session_token,
         'session_expiration': str(user.session_expiration),
-        'update_token': user.update_token
+        'update_token': user.update_token,
+        'user_id': user.id
     })
 
 @app.route('/login/', methods=['POST'])
@@ -70,7 +71,8 @@ def login():
     return json.dumps({
         'session_token': user.session_token,
         'session_expiration': str(user.session_expiration),
-        'update_token': user.update_token
+        'update_token': user.update_token,
+        'user_id': user.id
     })
 
 @app.route('/session/', methods=['POST'])
@@ -127,7 +129,7 @@ def friend_request(requester_id, requested_id):
         'requester': requester_id,
         'requested': requested_id,
         'action_user': friendship.action_user,
-        'status': 'pending'
+        'status': 'pending',
     })
 
 @app.route('/friend/accept/<int:requester_id>/<int:requested_id>/', methods=['POST'])
@@ -159,20 +161,12 @@ def friend_decline(requester_id, requested_id):
         'requested': requested_id,
         'action_user': relation.action_user,
         'status': 'declined'
-    })
-
+    })  
 
 @app.route('/friend/list/<int:user_id>/')
 def get_friend_list(user_id):
     friend_list = user_dao.friend_list(user_id)
-    return json.dumps({'user_id': friend_list})
-
-@app.route('/posts/<int:user>/')
-def get_user_posts(user):
-    posts = Post.query.filter_by(user_id=user).all()
-    if posts is None:
-        return json.dumps({'success': False, 'error': 'Posts not found'}), 404
-    return json.dumps({'success': True, 'data': [post.serialize() for post in posts]})
+    return json.dumps({'friends_user_id': friend_list})
 
 @app.route('/posts/<int:user>/', methods=['POST'])
 def create_post(user):
@@ -199,28 +193,54 @@ def delete_post(post):
     db.session.commit()
     return json.dumps({'success': True, 'data': post.serialize()}), 200
 
+@app.route('/posts/<int:user>/')
+def get_user_posts(user)
+    posts = Post.query.filter_by(user_id=user).all()
+    if posts is None:
+        return json.dumps({'success': False, 'error': 'Posts not found'}), 404
+    return json.dumps({'success': True, 'data': [post.serialize() for post in posts]})
+
 @app.route('/friend/posts/<int:user_id>/')
 def get_friend_posts(user_id):
     posts = []
     friend_list = user_dao.friend_list(user_id)
     for i in friend_list:
         posts = Post.query.filter_by(user_id=i).all()
-        for post in posts:
-            posts.append(post)
     return json.dumps({'success': True, 'data': [post.serialize() for post in posts]})
 
 
-@app.route('/post/comment/<int:user_id>/', methods=['POST'])
-def create_comment(user_id):
-    pass
+@app.route('/comment/<int:userid>/<int:postid>/', methods=['POST'])
+def create_comment(userid, postid):
+    post_body = json.loads(request.data)
+    try:
+        comment = Comment(
+            text=post_body.get('text'),
+            user_id=userid,
+            post_id=postid
+        )
+        db.session.add(comment)
+        db.session.commit()
+  
+        return json.dumps({'success': True, 'data': comment.serialize()}), 201
 
-@app.route('/post/comment/<int:comment_id>/', methods=['DELETE'])
+    except KeyError as e:
+        return json.dumps({'success': False, 'data': 'Invalid input'}), 404  
+
+@app.route('/comment/<int:comment_id>/', methods=['DELETE'])
 def delete_comment(comment_id):
-    pass
+    comment = Comment.query.filter_by(id=comment_id).first()
+    if comment is None:
+        return json.dumps({'success': False, 'error': 'Comment not found!'}), 404
+    db.session.delete(comment)
+    db.session.commit()
+    return json.dumps({'success': True, 'data': comment.serialize()}), 200
 
-
-def get_user_comments(user_id):
-    pass
+@app.route('/comments/<int:user>/')
+def get_user_comments(user):
+    comments = Comment.query.filter_by(user_id=user).all()
+    if comments is None:
+        return json.dumps({'success': False, 'error': 'Comments not found'}), 404
+    return json.dumps({'success': True, 'data': [comment.serialize() for comment in comments]})
 
 # like system
 

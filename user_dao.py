@@ -50,22 +50,19 @@ def get_relationship(user1, user2):
 
 def check_friendship(first, second):
     relation = get_relationship(first, second)
-    if relation is None:
-        return False
-    elif (relation.status == 2):
+    if (relation is not None and relation.status == 2):
         return True
     else:
         return False
 
 def num_users():
+    print(db.session.query(User).count())
     return db.session.query(User).count()
 
 def friend_list(user_id):
     friend_list = []
-    for i in (1, num_users()+1):
-        if (i == user_id):
-            continue
-        if (check_friendship(user_id, i)):
+    for i in range(0, num_users()+1):
+        if (check_friendship(i, user_id)):
             friend_list.append(i) # add the user to user_id's friendlist
     return friend_list
 
