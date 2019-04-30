@@ -194,7 +194,7 @@ def delete_post(post):
     return json.dumps({'success': True, 'data': post.serialize()}), 200
 
 @app.route('/posts/<int:user>/')
-def get_user_posts(user)
+def get_user_posts(user):
     posts = Post.query.filter_by(user_id=user).all()
     if posts is None:
         return json.dumps({'success': False, 'error': 'Posts not found'}), 404
