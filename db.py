@@ -24,7 +24,6 @@ class User(db.Model):
     comments = db.relationship('Comment', cascade='delete')
 
     def __init__(self, **kwargs):
-
         self.email = kwargs.get('email')
         self.password_digest = bcrypt.hashpw(str(kwargs.get('password')).encode('utf8'),
                                             bcrypt.gensalt(rounds=13))
@@ -85,11 +84,13 @@ class Comment(db.Model):
     __tablename__ = 'comment'
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.String, nullable=False)
+    liked = db.Column(db.Integer, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     post_id = db.Column(db.Integer, db.ForeignKey('post.id'), nullable=False)
 
     def __init__(self, **kwargs):
         self.text = kwargs.get('text', '')
+        self.liked = 0
         self.user_id = kwargs.get('user_id')
         self.post_id = kwargs.get('post_id')
         
@@ -97,6 +98,7 @@ class Comment(db.Model):
         return{
             'id': self.id,
             'text': self.text,
+            'liked': self.liked,
             'post_id': self.post_id
         }
 

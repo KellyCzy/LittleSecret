@@ -17,7 +17,6 @@ with app.app_context():
     user_dao.create_user('hq45@cornell.edu', '1234')
     user_dao.create_user('wg225@cornell.edu', '1234')
 
-
 def extract_token(request):
     auth_header = request.headers.get('Authorization')
     if auth_header is None:
@@ -61,12 +60,12 @@ def login():
     password = post_body.get('password')
 
     if email is None or password is None:
-        return json.dumps({'error': 'Invalid email or password'})
+        return json.dumps({'error': 'Invalid email or password'}), 404
 
     success, user = user_dao.verify_credentials(email, password)
 
     if not success:
-        return json.dumps({'error': 'Incorrect email or password'}) 
+        return json.dumps({'error': 'Incorrect email or password'}), 404
     
     return json.dumps({
         'session_token': user.session_token,
@@ -225,6 +224,17 @@ def create_comment(userid, postid):
 
     except KeyError as e:
         return json.dumps({'success': False, 'data': 'Invalid input'}), 404  
+
+
+@app.route('/comment/<int:comment_id>/like/', methods=['POST'])
+def like_comment(comment_id):
+   comment = Comment.query.filter_by(id=comment_id).first()
+    if comment is None:
+        return json.dumps({'success': False, 'error': 'Comment not found!'}), 404
+    comment.liked+=1
+    db.session.commit()
+    return json.dumps({'success': True, 'data': comment.serialize()}), 201
+
 
 @app.route('/comment/<int:comment_id>/', methods=['DELETE'])
 def delete_comment(comment_id):
