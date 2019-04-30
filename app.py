@@ -228,7 +228,7 @@ def create_comment(userid, postid):
 
 @app.route('/comment/<int:comment_id>/like/', methods=['POST'])
 def like_comment(comment_id):
-   comment = Comment.query.filter_by(id=comment_id).first()
+    comment = Comment.query.filter_by(id=comment_id).first()
     if comment is None:
         return json.dumps({'success': False, 'error': 'Comment not found!'}), 404
     comment.liked+=1

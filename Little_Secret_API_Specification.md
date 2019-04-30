@@ -1,5 +1,12 @@
-# Little Secrete API Specification
+# Little Secret API Specification
+Endpoint: http://34.74.44.203/
 
+## Home Page
+
+*Request:* `GET` `/`
+*Response:*
+
+    {"message": "Hello, World!"}
 ## Register a user
 
 *Request:* `POST` ```/register``/`
@@ -39,7 +46,7 @@ Post body:
 ## Send a friend request
 
 *Request:* **`POST` ```/friend/request/<int:requester_id>/<int:requested_id>``/`
-*Response:*
+*Respons**e**:*
 
     {
       'requester': 1,
@@ -158,6 +165,21 @@ Post body:
       'data': {
         "id": 1, 
         "text": "user 1 first comment", 
+        "liked": 0,
+        "post_id": 1
+      }
+    }
+## Like a comment
+
+*Request:* **`POST` ```/comment/<int:comment_id>``/like``/`
+*Response:*
+
+    {
+      'success': True, 
+      'data': {
+        "id": 1, 
+        "text": "user 1 first comment", 
+        "liked": 1,
         "post_id": 1
       }
     }
@@ -171,6 +193,7 @@ Post body:
       'data': {
         "id": 1, 
         "text": "user 1 first comment", 
+        "liked": 0,
         "post_id": 1
       }
     }
@@ -184,10 +207,12 @@ Post body:
       "data": [{
         "id": 1, 
         "text": "user 2 first comment to post 1",
+        "liked": 0,
         "post_id": 1
       },{
         "id": 3, 
         "text": "user 2 first comment to post 2",
+        "liked": 0,
         "post_id": 2
      }]
     }
