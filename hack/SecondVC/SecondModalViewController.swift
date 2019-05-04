@@ -67,9 +67,26 @@ class SecondModalViewController: UIViewController {
     
     @objc func dismissAndSaveContent(){
         if let postText = newPostTextView.text, postText != "" {
-            delegate!.addNewpost(to: postText)
+            //delegate!.addNewpost(to: postText)
+            
+            //---------------- New -------------------------------------
+            NetworkManager.createPost(user: MyVariables.user_id!) { user in
+                if user != nil {
+                    MyVariables.user_id = user?.user_id
+                    print("User with user_id \(user?.user_id ?? -1) just posted!")
+                    let tabBarViewController = TabBarViewController()
+                    self.navigationController?.pushViewController(tabBarViewController, animated: true)
+                } else {
+                    let alert = UIAlertController(title: "Alert", message: "Invalid Post Information", preferredStyle: .alert)
+                    self.present(alert, animated: true, completion: nil)
+                }
+            }
+            
+            //-------------------------------------------------------------
+                self.dismiss(animated: true, completion: nil)
             _ = navigationController?.popViewController(animated: true)
         }
+    
         
         if newPostTextView.text?.isEmpty == true {
             let alert = UIAlertController(title: "Alert", message: "You can't share empty secret!", preferredStyle: .alert)

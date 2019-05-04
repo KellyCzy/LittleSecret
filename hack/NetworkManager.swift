@@ -11,6 +11,7 @@ import Alamofire
 
 let loginEndpoint = "http://34.74.44.203/login/"
 let addFriendEndpoint = "http://34.74.44.203/friend/request/"
+let postEndpoint = "http://34.74.44.203/post/"
 
 class NetworkManager {
     
@@ -39,8 +40,9 @@ class NetworkManager {
         }
     }
 
-    static func addFriend(email:String, completion:@escaping (User?) -> Void){
+    static func addFriend(user: Int, email:String, completion:@escaping (User?) -> Void){
         let parameters: [String: Any] = [
+            "user_id" : user,
             "email": email,
         ]
         Alamofire.request(addFriendEndpoint, method: .post, parameters: parameters, encoding: JSONEncoding.default).validate().responseData{(response) in switch response.result{
@@ -60,8 +62,31 @@ class NetworkManager {
             completion(nil)
         }
     }
-    
-    
-    
+  
 }
+    //------------------------------New---------------------------------
+    static func createPost(user: Int, completion:@escaping (User?) -> Void){
+        let parameters: [String: Any] = [
+            "user_id" : user,
+        ]
+        Alamofire.request("http://34.74.44.203/post/\(MyVariables.user_id ?? -1)", method: .post, parameters: parameters, encoding: JSONEncoding.default).validate().responseData{(response) in switch response.result{
+        case .success(let data):
+            if let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) {
+                print(json)
+            }
+            let jsonDecoder = JSONDecoder()
+            if let user = try? jsonDecoder.decode(User.self, from: data) {
+                completion(user)
+            } else {
+                print("Invalid Response Data")
+                completion(nil)
+            }
+        case .failure(let error):
+            print(error.localizedDescription)
+            completion(nil)
+            }
+        }
+        //------------------------------------------------------------
+    }
 }
+

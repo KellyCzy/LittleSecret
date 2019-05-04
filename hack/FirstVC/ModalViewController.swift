@@ -97,7 +97,7 @@ class ModalViewController: UIViewController {
         }
     
     func addFriend(email: String) {
-        NetworkManager.addFriend(email: email){ user in
+        NetworkManager.addFriend(user: MyVariables.user_id ?? -1, email: email){ user in
             if email != nil {
                 print("User wants to add friend")
                 self.dismissAndSaveContact()

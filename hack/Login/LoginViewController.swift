@@ -105,6 +105,7 @@ class LoginViewController: UIViewController {
     func login(email: String, password: String) {
         NetworkManager.login(email: email, password: password) { user in
             if user != nil {
+                MyVariables.user_id = user?.user_id
                 print("User with user_id \(user?.user_id ?? -1) logged in!")
                 let tabBarViewController = TabBarViewController()
                 self.navigationController?.pushViewController(tabBarViewController, animated: true)
