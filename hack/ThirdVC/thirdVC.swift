@@ -22,18 +22,18 @@ class thirdVC: UIViewController {
     var labelHeight: CGFloat = 20
     var labelWidth: CGFloat = 100
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.title = "Information"
-        profileImage = UIImage(named: "placeholder")
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.navigationItem.title = "Information"
+        profileImage = UIImage(named: "f1")
         
         signOut = UIBarButtonItem()
         signOut.title = "Sign Out"
         signOut.target = self
         signOut.style = .plain
         signOut.action = #selector(popToRootViewController)
-        self.navigationItem.rightBarButtonItem = signOut
-        self.navigationItem.setHidesBackButton(true, animated: true)
+        self.tabBarController?.navigationItem.rightBarButtonItem = signOut
+        self.tabBarController?.navigationItem.setHidesBackButton(true, animated: true)
         
         imageUpload = UIButton()
         imageUpload.translatesAutoresizingMaskIntoConstraints = false
@@ -85,11 +85,11 @@ class thirdVC: UIViewController {
         }
         
         setupConstraints()
-
     }
     
     @objc func popToRootViewController(){
-        self.tabBarController?.navigationController?.popToRootViewController(animated: true)
+        navigationController?.popToRootViewController(animated: true)
+        //view.window?.rootViewController?.dismiss(animated: true, completion: nil)
     }
     
     @objc func changeProfileImage(){

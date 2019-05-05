@@ -25,14 +25,11 @@ class LoginViewController: UIViewController {
     var buttonHeight: CGFloat = 35
     var buttonWidth: CGFloat = 80
     
-    var tabBarVC: TabBarViewController!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .white
         
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
         
         welcome = UIImageView(frame:.zero)
         welcome.translatesAutoresizingMaskIntoConstraints = false
@@ -105,19 +102,18 @@ class LoginViewController: UIViewController {
         present(modalViewController, animated: true, completion: nil)
     }
     
-    func login(email: String, password: String, completion: @escaping () -> Void) {
+    func login(email: String, password: String) {
         NetworkManager.login(email: email, password: password) { user in
-            if user != nil {
+            if  user != nil {
                 print("User with user_id \(user?.user_id ?? -1) logged in!")
                 let tabBarViewController = TabBarViewController()
-                self.tabBarVC = tabBarViewController
                 self.navigationController?.pushViewController(tabBarViewController, animated: true)
+                
                 tabBarViewController.email = email
                 tabBarViewController.password = password
                 if let id = user?.user_id {
                     tabBarViewController.idNumber = String(id)
                     MyVariables.user_id = id
-                    completion()
                     print("\(tabBarViewController.email ?? "email") and \(tabBarViewController.idNumber ?? "id")")
                 }
             } else {
@@ -134,11 +130,7 @@ class LoginViewController: UIViewController {
             self.present(alert, animated: true, completion: nil)
         }
         if let email = usernameTextField.text, let password = passwordTextField.text {
-            login(email: email, password: password) {
-                if let userID = MyVariables.user_id {
-                    self.tabBarVC.firstViewController.getFriends(user_id: userID)
-                }
-            }
+            login(email: email, password: password)
         }
         
         self.dismiss(animated: true, completion: nil)
@@ -175,7 +167,7 @@ class LoginViewController: UIViewController {
             ])
        
         NSLayoutConstraint.activate([
-            usernameTextField.leadingAnchor.constraint(equalTo: usernameLabel.trailingAnchor),
+            usernameTextField.leadingAnchor.constraint(equalTo: usernameLabel.trailingAnchor, constant:4),
             usernameTextField.topAnchor.constraint(equalTo: usernameLabel.topAnchor, constant: labelHeight/5),
             usernameTextField.heightAnchor.constraint(equalToConstant: textFieldHeight),
             usernameTextField.widthAnchor.constraint(equalToConstant: textFieldWidth)
@@ -187,7 +179,7 @@ class LoginViewController: UIViewController {
             passwordLabel.widthAnchor.constraint(equalToConstant: labelWidth)
             ])
         NSLayoutConstraint.activate([
-            passwordTextField.leadingAnchor.constraint(equalTo: passwordLabel.trailingAnchor),
+            passwordTextField.leadingAnchor.constraint(equalTo: passwordLabel.trailingAnchor, constant:4),
             passwordTextField.topAnchor.constraint(equalTo: passwordLabel.topAnchor, constant: labelHeight/5),
             passwordTextField.heightAnchor.constraint(equalToConstant: textFieldHeight),
             passwordTextField.widthAnchor.constraint(equalToConstant: textFieldWidth)
