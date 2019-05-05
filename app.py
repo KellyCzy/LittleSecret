@@ -14,8 +14,25 @@ db.init_app(app)
 with app.app_context():
     db.drop_all()
     db.create_all()
-    user_dao.create_user('hq45@cornell.edu', '1234')
     user_dao.create_user('wg225@cornell.edu', '1234')
+    user_dao.create_user('hq45@cornell.edu', '1234')
+    user_dao.create_user('zc96@cornell.edu', '5678')
+    user_dao.create_user('cnt26@cornell.edu', '5678')
+    relation1 = Friendship(user_1_id=1, user_2_id=2, status =2, action_user=2)
+    relation2 = Friendship(user_1_id=1, user_2_id=3, status =2, action_user=3)
+    relation3 = Friendship(user_1_id=1, user_2_id=4, status =1, action_user=1)
+    db.session.add(relation1)
+    db.session.add(relation2)
+    db.session.add(relation3)
+    post1 = Post(text = 'User 1 first post', user_id = 1)
+    db.session.add(post1)
+    post2 = Post(text = 'User 2 first post', user_id = 2)
+    db.session.add(post2)
+    post3 = Post(text = 'User 3 first post', user_id = 3)
+    db.session.add(post3)
+    post4 = Post(text = 'User 4 first post', user_id = 4)
+    db.session.add(post4)
+    db.session.commit()
 
 def extract_token(request):
     auth_header = request.headers.get('Authorization')
@@ -30,7 +47,7 @@ def extract_token(request):
 
 @app.route('/')
 def hello_world():
-    return json.dumps({'message': 'Hello, World!'})
+    return json.dumps({'message': 'Hello, World2!'} )
 
 @app.route('/register/', methods=['POST'])
 def register_account():
@@ -105,8 +122,10 @@ def secret_message():
 
     return json.dumps({'message': 'Logged in as ' + user.email })
 
-@app.route('/friend/request/<int:requester_id>/<int:requested_id>/', methods=['POST'])
-def friend_request(requester_id, requested_id):
+@app.route('/friend/request/<int:requester_id>/<requested_email>/', methods=['POST'])
+def friend_request(requester_id, requested_email):
+    requested_user = User.query.filter(User.email==requested_email).first()
+    requested_id = requested_user.id
     if (requester_id < requested_id):
         friendship = Friendship(
             user_1_id = requester_id,
@@ -165,7 +184,12 @@ def friend_decline(requester_id, requested_id):
 @app.route('/friend/list/<int:user_id>/')
 def get_friend_list(user_id):
     friend_list = user_dao.friend_list(user_id)
-    return json.dumps({'friends_user_id': friend_list})
+    return json.dumps({'friends': [friend.serialize() for friend in friend_list]})
+
+@app.route('/friend/request/list/<int:user_id>/')
+def get_request_friend_list(user_id):
+    request_list = user_dao.request_friend_list(user_id)
+    return json.dumps({'friends': [friend.serialize() for friend in request_list]})
 
 @app.route('/posts/<int:user>/', methods=['POST'])
 def create_post(user):
@@ -204,7 +228,15 @@ def get_friend_posts(user_id):
     posts = []
     friend_list = user_dao.friend_list(user_id)
     for i in friend_list:
-        posts = Post.query.filter_by(user_id=i).all()
+        post1 = Post.query.filter_by(user_id=i.id).all()
+        for post in post1:
+            posts.append(post)
+    self_posts = Post.query.filter_by(user_id=user_id).all()
+    if self_posts is None:
+        return json.dumps({'success': False, 'error': 'Posts not found'}), 404
+    for each in self_posts:
+        posts.append(each)
+    posts.reverse()
     return json.dumps({'success': True, 'data': [post.serialize() for post in posts]})
 
 

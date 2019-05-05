@@ -52,6 +52,12 @@ class User(db.Model):
     def verify_update_token(self, update_token):
         return update_token == self.update_token
 
+    def serialize(self):
+        return{
+            'id': self.id,
+            'email': self.email
+        }
+
 class Friendship(db.Model):
     __tablename__ = 'friendship'
     user_1_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True, nullable=False)
