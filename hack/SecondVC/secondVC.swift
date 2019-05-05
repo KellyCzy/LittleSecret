@@ -21,15 +21,15 @@ class secondVC: UIViewController {
     var secondRightBarButton: UIBarButtonItem!
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.tabBarController?.navigationItem.title = "Secrets"
-        
-        secondRightBarButton = UIBarButtonItem()
-        secondRightBarButton.title = "New Post"
-        secondRightBarButton.target = self
-        secondRightBarButton.style = .plain
-        secondRightBarButton.action = #selector(presentSecnondMVC)
-        self.tabBarController?.navigationItem.rightBarButtonItem = secondRightBarButton
+//        super.viewWillAppear(animated)
+//        self.tabBarController?.navigationItem.title = "Secrets"
+//
+//        secondRightBarButton = UIBarButtonItem()
+//        secondRightBarButton.title = "New Post"
+//        secondRightBarButton.target = self
+//        secondRightBarButton.style = .plain
+//        secondRightBarButton.action = #selector(presentSecnondMVC)
+//        self.tabBarController?.navigationItem.rightBarButtonItem = secondRightBarButton
     }
     
     @objc func presentSecnondMVC() {
@@ -52,6 +52,15 @@ class secondVC: UIViewController {
         secretCollectionView.delegate = self
         secretCollectionView.register(SecretTextCollectionViewCell.self, forCellWithReuseIdentifier: secretTextCellReuseIdentifier)
         view.addSubview(secretCollectionView)
+        
+        self.title = "Secrets"
+        
+        secondRightBarButton = UIBarButtonItem()
+        secondRightBarButton.title = "New Post"
+        secondRightBarButton.target = self
+        secondRightBarButton.style = .plain
+        secondRightBarButton.action = #selector(presentSecnondMVC)
+        self.navigationItem.rightBarButtonItem = secondRightBarButton
         
         setupConstraints()
     }

@@ -9,14 +9,14 @@
 import UIKit
 
 protocol addContactDelegate: class {
-    func addContact(to name:String, email:String, image:String)
+    func addContact(to id: Int, email: String)
 }
 
 class firstVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! ContactTableViewCell
-        let person = persons[indexPath.row]
-        cell.configure(for: person)
+        let friend = persons[indexPath.row]
+        cell.configure(for: friend)
         cell.setNeedsUpdateConstraints()
         cell.selectionStyle = .gray
         return cell
@@ -27,33 +27,33 @@ class firstVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var labelHeight: CGFloat = 50
 
     var tableView: UITableView!
-    var persons: [Person]!
+    var persons: [Friend] = []
     
     let reuseIdentifier = "personCellReuse"
     let cellHeight: CGFloat = 90
 
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.tabBarController?.navigationItem.title = "Contacts"
-        
-        rightBarButton = UIBarButtonItem()
-        rightBarButton.title = "Add"
-        rightBarButton.target = self
-        rightBarButton.style = .plain
-        rightBarButton.action = #selector(presentMVC)
-        self.tabBarController?.navigationItem.rightBarButtonItem = rightBarButton
-        self.tabBarController?.navigationItem.setHidesBackButton(true, animated: true)
+//        super.viewWillAppear(animated)
+//        self.tabBarController?.navigationItem.title = "Contacts"
+//
+//        rightBarButton = UIBarButtonItem()
+//        rightBarButton.title = "Add"
+//        rightBarButton.target = self
+//        rightBarButton.style = .plain
+//        rightBarButton.action = #selector(presentMVC)
+//        self.navigationController?.navigationItem.rightBarButtonItem = rightBarButton
+//        self.navigationController?.navigationItem.setHidesBackButton(true, animated: true)
     }
     
     override func viewDidLoad(){
         super.viewDidLoad()
         view.backgroundColor = .white
         
-        let A = Person(name: "Kelly", email: "301", image: "Kelly")
-        let B = Person(name: "Chengyin", email: "111", image: "f1")
-        let C = Person(name: "Wenyi",email: "11w", image: "friend")
-        let D = Person(name: "Qiaohan", email: "hq24", image:"f2")
-        persons = [A, B, C, D]
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+        
+//        let A = Person(name: "Kelly", email: "301", image: "Kelly")
+//        let B = Person(name: "Chengyin", email: "111", image: "friend")
+//        let C = Person(name: "Wenyi",email: "11w", image: "second")
         
         tableView = UITableView(frame: .zero)
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -62,7 +62,31 @@ class firstVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         tableView.register(ContactTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
         view.addSubview(tableView)
         
+        if let id = MyVariables.user_id {
+            getFriends(user_id: id)
+        }
+        
+        self.tabBarController?.navigationItem.title = "Contacts"
+        
+        rightBarButton = UIBarButtonItem()
+        rightBarButton.title = "Add"
+        rightBarButton.target = self
+        rightBarButton.style = .plain
+        rightBarButton.action = #selector(presentMVC)
+        self.navigationItem.rightBarButtonItem = rightBarButton
+        self.navigationItem.setHidesBackButton(true, animated: true)
+        
         setupConstraints()
+    }
+    
+    func getFriends(user_id: Int) {
+        NetworkManager.getFriendList(user_id: user_id) { (Friends) in
+            self.persons = Friends.friends
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+            print(Friends)
+        }
     }
     
     @objc func presentMVC() {
@@ -112,15 +136,15 @@ class firstVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     //Problem
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("selected")
-        pushDetailViewController(name: persons[indexPath.row].name, row: indexPath.row)
+        pushDetailViewController(name: persons[indexPath.row].email, row: indexPath.row)
     }
 }
 
 
 
 extension firstVC: addContactDelegate {
-    func addContact(to name: String, email:String, image:String) {
-        let new_person = Person(name: name,email: email, image:image)
+    func addContact(to id: Int, email:String) {
+        let new_person = Friend(id: id,email: email)
         persons.append(new_person)
         tableView.reloadData()
     }

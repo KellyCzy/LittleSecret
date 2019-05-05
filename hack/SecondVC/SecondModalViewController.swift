@@ -20,6 +20,7 @@ class SecondModalViewController: UIViewController {
     var cancelButton: UIButton!
     var buttonHeight: CGFloat = 35
     var buttonWidth: CGFloat = 65
+    var id: Int = -1
     weak var delegate: addNewPostDelegate?
     
     override func viewDidLoad() {
@@ -62,19 +63,20 @@ class SecondModalViewController: UIViewController {
         cancelButton.layer.cornerRadius = 8
         view.addSubview(cancelButton)
         
+        
+        
         setupConstraints()
     }
     
-    @objc func dismissAndSaveContent(){
+    @objc func dismissAndSaveContent() {
         if let postText = newPostTextView.text, postText != "" {
-            delegate!.addNewpost(to: postText)
-            
+            //delegate!.addNewpost(to: postText)
             //---------------- New -------------------------------------
-            print(MyVariables.user_id)
-            NetworkManager.createPost(user: MyVariables.user_id!, text:postText) { user in
-                if user != nil  {
-                    //delegate!.addNewpost(to: PostBackend.data.text)
-                    print("User just posted!")
+            NetworkManager.createPost() { post in
+                if post != nil  {
+//                    self.delegate!.addNewpost(to: post!.text ?? "n/a")
+                    print("\(String(describing: post))")
+                    print("User \(String(describing: post?.id)) just posted!")
                     let tabBarViewController = TabBarViewController()
                     self.navigationController?.pushViewController(tabBarViewController, animated: true)
                 } else {
@@ -83,8 +85,10 @@ class SecondModalViewController: UIViewController {
                 }
             }
             
+            
             //-------------------------------------------------------------
                 self.dismiss(animated: true, completion: nil)
+            _ = navigationController?.popViewController(animated: true)
         }
     
         
