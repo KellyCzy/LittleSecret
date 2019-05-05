@@ -104,11 +104,18 @@ class LoginViewController: UIViewController {
     
     func login(email: String, password: String) {
         NetworkManager.login(email: email, password: password) { user in
-            if user != nil {
-                MyVariables.user_id = user?.user_id
+            if  user != nil {
                 print("User with user_id \(user?.user_id ?? -1) logged in!")
                 let tabBarViewController = TabBarViewController()
                 self.navigationController?.pushViewController(tabBarViewController, animated: true)
+                
+                tabBarViewController.email = email
+                tabBarViewController.password = password
+                if let id = user?.user_id {
+                    tabBarViewController.idNumber = String(id)
+                    MyVariables.user_id = id
+                    print("\(tabBarViewController.email ?? "email") and \(tabBarViewController.idNumber ?? "id")")
+                }
             } else {
                 let alert = UIAlertController(title: "Alert", message: "Invalid Login Information", preferredStyle: .alert)
                 self.present(alert, animated: true, completion: nil)
@@ -134,7 +141,7 @@ class LoginViewController: UIViewController {
         NSLayoutConstraint.activate([
             welcome.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
             welcome.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            welcome.heightAnchor.constraint(equalToConstant: 200),
+            welcome.heightAnchor.constraint(equalToConstant: 250),
             welcome.widthAnchor.constraint(equalToConstant: 400)
             ])
         
@@ -160,7 +167,7 @@ class LoginViewController: UIViewController {
             ])
        
         NSLayoutConstraint.activate([
-            usernameTextField.leadingAnchor.constraint(equalTo: usernameLabel.trailingAnchor),
+            usernameTextField.leadingAnchor.constraint(equalTo: usernameLabel.trailingAnchor, constant:4),
             usernameTextField.topAnchor.constraint(equalTo: usernameLabel.topAnchor, constant: labelHeight/5),
             usernameTextField.heightAnchor.constraint(equalToConstant: textFieldHeight),
             usernameTextField.widthAnchor.constraint(equalToConstant: textFieldWidth)
@@ -172,7 +179,7 @@ class LoginViewController: UIViewController {
             passwordLabel.widthAnchor.constraint(equalToConstant: labelWidth)
             ])
         NSLayoutConstraint.activate([
-            passwordTextField.leadingAnchor.constraint(equalTo: passwordLabel.trailingAnchor),
+            passwordTextField.leadingAnchor.constraint(equalTo: passwordLabel.trailingAnchor, constant:4),
             passwordTextField.topAnchor.constraint(equalTo: passwordLabel.topAnchor, constant: labelHeight/5),
             passwordTextField.heightAnchor.constraint(equalToConstant: textFieldHeight),
             passwordTextField.widthAnchor.constraint(equalToConstant: textFieldWidth)

@@ -14,6 +14,9 @@ class TabBarViewController: UITabBarController {
     var firstImage: UIImage!
     var secondImage: UIImage!
     var thirdImage: UIImage!
+    var email: String?
+    var idNumber: String?
+    var password: String?
     var iconSize: CGSize = CGSize(width: 32, height: 32)
 
     override func viewDidLoad() {

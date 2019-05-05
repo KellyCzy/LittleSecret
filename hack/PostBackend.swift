@@ -9,15 +9,21 @@
 import Foundation
 
 //----------------New---------------------
-struct PostBackend {
+struct PostBackend:Codable {
     
      var success: Bool
-    struct data{
-        var id: Int
-        var text: String
-        var comments: [String]
-        
-    }
+     var data:Data
+    
 }
 
+
+struct Data :Codable {
+    var id:Int
+    var text:String?
+    var comments:[String]
+}
+
+struct Posts:Codable{
+    var post:[Data]
+}
 

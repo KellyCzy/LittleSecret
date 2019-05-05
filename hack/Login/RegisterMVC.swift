@@ -11,10 +11,10 @@ import UIKit
 
 class RegisterMVC: UIViewController {
     
-    var nameLabel: UILabel!
-    var nameTextField: UITextField!
-    var phoneNumberLabel: UILabel!
-    var phoneNumberTextField: UITextField!
+    var emailLabel: UILabel!
+    var emailTextField: UITextField!
+    var passwordLabel: UILabel!
+    var passwordTextField: UITextField!
     var saveButton: UIButton!
     var cancelButton: UIButton!
     var buttonHeight: CGFloat = 35
@@ -37,39 +37,40 @@ class RegisterMVC: UIViewController {
         Image.image = UIImage(named: "download")
         view.addSubview(Image)
         
-        nameLabel = UILabel()
-        nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        nameLabel.text = "Name: "
-        nameLabel.textAlignment = .right
-        nameLabel.textColor = .black
-        view.addSubview(nameLabel)
+        emailLabel = UILabel()
+        emailLabel.translatesAutoresizingMaskIntoConstraints = false
+        emailLabel.text = "Email: "
+        emailLabel.textAlignment = .right
+        emailLabel.textColor = .black
+        view.addSubview(emailLabel)
         
-        nameTextField = UITextField()
-        nameTextField.translatesAutoresizingMaskIntoConstraints = false
-        nameTextField.text = "Enter your name"
-        nameTextField.borderStyle = .roundedRect
-        nameTextField.backgroundColor = .white
-        nameTextField.textAlignment = .center
-        nameTextField.textColor = .gray
-        nameTextField.clearsOnBeginEditing = true
-        view.addSubview(nameTextField)
+        emailTextField = UITextField()
+        emailTextField.translatesAutoresizingMaskIntoConstraints = false
+        emailTextField.text = "Enter your email"
+        emailTextField.borderStyle = .roundedRect
+        emailTextField.autocapitalizationType = .none
+        emailTextField.backgroundColor = .white
+        emailTextField.textAlignment = .center
+        emailTextField.textColor = .gray
+        emailTextField.clearsOnBeginEditing = true
+        view.addSubview(emailTextField)
         
-        phoneNumberLabel = UILabel()
-        phoneNumberLabel.translatesAutoresizingMaskIntoConstraints = false
-        phoneNumberLabel.text = "Email Address "
-        phoneNumberLabel.textAlignment = .right
-        phoneNumberLabel.textColor = .black
-        view.addSubview(phoneNumberLabel)
+        passwordLabel = UILabel()
+        passwordLabel.translatesAutoresizingMaskIntoConstraints = false
+        passwordLabel.text = "Password: "
+        passwordLabel.textAlignment = .right
+        passwordLabel.textColor = .black
+        view.addSubview(passwordLabel)
         
-        phoneNumberTextField = UITextField()
-        phoneNumberTextField.translatesAutoresizingMaskIntoConstraints = false
-        phoneNumberTextField.text = "Enter an email address"
-        phoneNumberTextField.borderStyle = .roundedRect
-        phoneNumberTextField.backgroundColor = .white
-        phoneNumberTextField.textAlignment = .center
-        phoneNumberTextField.textColor = .gray
-        phoneNumberTextField.clearsOnBeginEditing = true
-        view.addSubview(phoneNumberTextField)
+        passwordTextField = UITextField()
+        passwordTextField.translatesAutoresizingMaskIntoConstraints = false
+        passwordTextField.text = "Enter your password"
+        passwordTextField.borderStyle = .roundedRect
+        passwordTextField.backgroundColor = .white
+        passwordTextField.textAlignment = .center
+        passwordTextField.textColor = .gray
+        passwordTextField.clearsOnBeginEditing = true
+        view.addSubview(passwordTextField)
         
         saveButton = UIButton()
         saveButton.translatesAutoresizingMaskIntoConstraints = false
@@ -86,7 +87,7 @@ class RegisterMVC: UIViewController {
         cancelButton.layer.cornerRadius = 10
         cancelButton.addTarget(self, action: #selector(dismissMVC), for: .touchUpInside)
         view.addSubview(cancelButton)
-    
+        
         setupConstraints()
     }
     
@@ -99,28 +100,28 @@ class RegisterMVC: UIViewController {
             Image.widthAnchor.constraint(equalToConstant: 150)
             ])
         NSLayoutConstraint.activate([
-            nameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -labelWidth*0.8),
-            nameLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: labelHeight * 0.3),
-            nameLabel.heightAnchor.constraint(equalToConstant: labelHeight),
-            nameLabel.widthAnchor.constraint(equalToConstant: labelWidth)
+            emailLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -labelWidth*0.8),
+            emailLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: labelHeight * 0.3),
+            emailLabel.heightAnchor.constraint(equalToConstant: labelHeight),
+            emailLabel.widthAnchor.constraint(equalToConstant: labelWidth)
             ])
         NSLayoutConstraint.activate([
-            nameTextField.leadingAnchor.constraint(equalTo: nameLabel.trailingAnchor, constant:4),
-            nameTextField.topAnchor.constraint(equalTo: nameLabel.topAnchor, constant: labelHeight/5),
-            nameTextField.heightAnchor.constraint(equalToConstant: textFieldHeight),
-            nameTextField.widthAnchor.constraint(equalToConstant: textFieldWidth)
+            emailTextField.leadingAnchor.constraint(equalTo: emailLabel.trailingAnchor, constant:4),
+            emailTextField.topAnchor.constraint(equalTo: emailLabel.topAnchor, constant: labelHeight/5),
+            emailTextField.heightAnchor.constraint(equalToConstant: textFieldHeight),
+            emailTextField.widthAnchor.constraint(equalToConstant: textFieldWidth)
             ])
         NSLayoutConstraint.activate([
-            phoneNumberLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -labelWidth*0.8),
-            phoneNumberLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: labelHeight * 1.3),
-            phoneNumberLabel.heightAnchor.constraint(equalToConstant: labelHeight),
-            phoneNumberLabel.widthAnchor.constraint(equalToConstant: labelWidth)
+            passwordLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -labelWidth*0.8),
+            passwordLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: labelHeight * 1.3),
+            passwordLabel.heightAnchor.constraint(equalToConstant: labelHeight),
+            passwordLabel.widthAnchor.constraint(equalToConstant: labelWidth)
             ])
         NSLayoutConstraint.activate([
-            phoneNumberTextField.leadingAnchor.constraint(equalTo: phoneNumberLabel.trailingAnchor, constant:4),
-            phoneNumberTextField.topAnchor.constraint(equalTo: phoneNumberLabel.topAnchor, constant: labelHeight/5),
-            phoneNumberTextField.heightAnchor.constraint(equalToConstant: textFieldHeight),
-            phoneNumberTextField.widthAnchor.constraint(equalToConstant: textFieldWidth)
+            passwordTextField.leadingAnchor.constraint(equalTo: passwordLabel.trailingAnchor, constant:4),
+            passwordTextField.topAnchor.constraint(equalTo: passwordLabel.topAnchor, constant: labelHeight/5),
+            passwordTextField.heightAnchor.constraint(equalToConstant: textFieldHeight),
+            passwordTextField.widthAnchor.constraint(equalToConstant: textFieldWidth)
             ])
         NSLayoutConstraint.activate([
             saveButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -buttonWidth*0.8),
@@ -128,7 +129,7 @@ class RegisterMVC: UIViewController {
             saveButton.heightAnchor.constraint(equalToConstant: buttonHeight),
             saveButton.widthAnchor.constraint(equalToConstant: buttonWidth)
             ])
-            saveButton.backgroundColor = UIColor(red: 46/255, green: 150/255, blue: 87/255, alpha: 1)
+        saveButton.backgroundColor = UIColor(red: 46/255, green: 150/255, blue: 87/255, alpha: 1)
         
         NSLayoutConstraint.activate([
             cancelButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: buttonWidth*0.8),
@@ -136,7 +137,17 @@ class RegisterMVC: UIViewController {
             cancelButton.heightAnchor.constraint(equalToConstant: buttonHeight),
             cancelButton.widthAnchor.constraint(equalToConstant: buttonWidth)
             ])
-            cancelButton.backgroundColor = UIColor(red:255/255, green: 127/255, blue:80/255, alpha: 1)
+        cancelButton.backgroundColor = UIColor(red:255/255, green: 127/255, blue:80/255, alpha: 1)
+    }
+    
+    func register(email: String, password: String) {
+        NetworkManager.register(email: email, password: password) { user in
+            if user != nil {
+                print("User with user_id \(user!.user_id) registered!")
+            }
+            self.dismiss(animated: true, completion: nil)
+        }
+        
     }
     
     @objc func dismissMVC() {
@@ -144,7 +155,15 @@ class RegisterMVC: UIViewController {
     }
     
     @objc func dismissAndRegister(){
-        dismissMVC()
+        if emailTextField.text?.isEmpty == true || passwordTextField.text?.isEmpty == true {
+            let alert = UIAlertController(title: "Alert", message: "Register information can't be empty", preferredStyle: .alert)
+            self.present(alert, animated: true, completion: nil)
+            self.dismiss(animated: true, completion: nil)
+        }
+        if let email = emailTextField.text, let password = passwordTextField.text {
+            register(email: email, password: password)
+        }
+        dismiss(animated: true, completion: nil)
     }
     
     

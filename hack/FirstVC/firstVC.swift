@@ -50,9 +50,10 @@ class firstVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         view.backgroundColor = .white
         
         let A = Person(name: "Kelly", email: "301", image: "Kelly")
-        let B = Person(name: "Chengyin", email: "111", image: "friend")
-        let C = Person(name: "Wenyi",email: "11w", image: "second")
-        persons = [A, B, C]
+        let B = Person(name: "Chengyin", email: "111", image: "f1")
+        let C = Person(name: "Wenyi",email: "11w", image: "friend")
+        let D = Person(name: "Qiaohan", email: "hq24", image:"f2")
+        persons = [A, B, C, D]
         
         tableView = UITableView(frame: .zero)
         tableView.translatesAutoresizingMaskIntoConstraints = false

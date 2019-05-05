@@ -83,6 +83,7 @@ class ModalViewController: UIViewController {
             saveButton.backgroundColor = .green
             saveButton.layer.cornerRadius = 10
             saveButton.addTarget(self, action: #selector(dismissAndSaveContact), for: .touchUpInside)
+            saveButton.backgroundColor = UIColor(red: 46/255, green: 150/255, blue: 87/255, alpha: 1)
             view.addSubview(saveButton)
             
             cancelButton = UIButton()
@@ -91,6 +92,7 @@ class ModalViewController: UIViewController {
             cancelButton.backgroundColor = .red
             cancelButton.layer.cornerRadius = 10
             cancelButton.addTarget(self, action: #selector(dismissMVC), for: .touchUpInside)
+            cancelButton.backgroundColor = UIColor(red:255/255, green: 127/255, blue:80/255, alpha: 1)
             view.addSubview(cancelButton)
             
             setupConstraints()

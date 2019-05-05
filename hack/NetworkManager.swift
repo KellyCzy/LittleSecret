@@ -12,6 +12,7 @@ import Alamofire
 let loginEndpoint = "http://34.74.44.203/login/"
 let addFriendEndpoint = "http://34.74.44.203/friend/request/"
 let postEndpoint = "http://34.74.44.203/post/"
+let registerEndpoint = "http://34.74.44.203/register/"
 
 class NetworkManager {
     
@@ -21,6 +22,31 @@ class NetworkManager {
             "password": password
         ]
         Alamofire.request(loginEndpoint, method: .post, parameters: parameters, encoding: JSONEncoding.default).validate().responseData { (response) in
+            switch response.result {
+            case .success(let data):
+                if let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) {
+                    print(json)
+                }
+                let jsonDecoder = JSONDecoder()
+                if let user = try? jsonDecoder.decode(User.self, from: data) {
+                    completion(user)
+                } else {
+                    print("Invalid Response Data")
+                    completion(nil)
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+                completion(nil)
+            }
+        }
+    }
+    
+    static func register(email: String, password: String, completion: @escaping (User?) -> Void) {
+        let parameters: [String: Any] = [
+            "email": email,
+            "password": password
+        ]
+        Alamofire.request(registerEndpoint, method: .post, parameters: parameters, encoding: JSONEncoding.default).validate().responseData { (response) in
             switch response.result {
             case .success(let data):
                 if let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) {
@@ -65,18 +91,18 @@ class NetworkManager {
   
 }
     //------------------------------New---------------------------------
-    static func createPost(user: Int, completion:@escaping (User?) -> Void){
+    static func createPost(user: Int, text:String, completion:@escaping (Data?) -> Void){
         let parameters: [String: Any] = [
-            "user_id" : user,
+            "text": text,
         ]
-        Alamofire.request("http://34.74.44.203/post/\(MyVariables.user_id ?? -1)", method: .post, parameters: parameters, encoding: JSONEncoding.default).validate().responseData{(response) in switch response.result{
+        Alamofire.request("http://34.74.44.203/posts/\(MyVariables.user_id ?? -1)/", method: .post,parameters: parameters, encoding: JSONEncoding.default).validate().responseData{(response) in switch response.result{
         case .success(let data):
             if let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) {
                 print(json)
             }
             let jsonDecoder = JSONDecoder()
-            if let user = try? jsonDecoder.decode(User.self, from: data) {
-                completion(user)
+            if let Post = try? jsonDecoder.decode(PostBackend.self, from: data) {
+                completion(Post.data)
             } else {
                 print("Invalid Response Data")
                 completion(nil)
@@ -88,5 +114,29 @@ class NetworkManager {
         }
         //------------------------------------------------------------
     }
+    
+    static func getFriendPost(user: Int, completion:@escaping (Posts?) -> Void){
+//        let parameters: [String: Any] = [
+//            "user_id" : user,
+//            "email": email,
+//        ]
+        Alamofire.request(addFriendEndpoint, method: .post, encoding: JSONEncoding.default).validate().responseData{(response) in switch response.result{
+        case .success(let data):
+            if let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) {
+                print(json)
+            }
+            let jsonDecoder = JSONDecoder()
+            if let posts = try? jsonDecoder.decode(Posts.self, from: data) {
+                completion(posts)
+            } else {
+                print("Invalid Response Data")
+                completion(nil)
+            }
+        case .failure(let error):
+            print(error.localizedDescription)
+            completion(nil)
+            }
+        }
 }
 
+}

@@ -19,6 +19,7 @@
 		698C0B76226A92850084819F /* secondVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698C0B75226A92850084819F /* secondVC.swift */; };
 		698C0B78226A92980084819F /* thirdVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698C0B77226A92980084819F /* thirdVC.swift */; };
 		A616A67F227A2EF700AC0474 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A616A67E227A2EF700AC0474 /* User.swift */; };
+		A61AE499227E214800533258 /* PostBackend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61AE498227E214800533258 /* PostBackend.swift */; };
 		A6642021226BD3B9008321C8 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6642020226BD3B9008321C8 /* Person.swift */; };
 		A6642023226BD499008321C8 /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6642022226BD499008321C8 /* ContactTableViewCell.swift */; };
 		A6642025226BDA4C008321C8 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6642024226BDA4C008321C8 /* DetailViewController.swift */; };
@@ -26,6 +27,7 @@
 		A670216A226E824400E71B26 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6702169226E824400E71B26 /* Post.swift */; };
 		A6802A2A226C19A100AE0D78 /* ModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6802A29226C19A100AE0D78 /* ModalViewController.swift */; };
 		A692DCC5227BD743005BB5D3 /* RegisterMVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A692DCC4227BD743005BB5D3 /* RegisterMVC.swift */; };
+		A695D31E227D5E04008BFE1E /* MyVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = A695D31D227D5E04008BFE1E /* MyVariables.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +46,7 @@
 		698C0B77226A92980084819F /* thirdVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = thirdVC.swift; sourceTree = "<group>"; };
 		9C5CB6A5D993804C7BA392E4 /* Pods_hack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A616A67E227A2EF700AC0474 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		A61AE498227E214800533258 /* PostBackend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostBackend.swift; sourceTree = "<group>"; };
 		A6642020226BD3B9008321C8 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		A6642022226BD499008321C8 /* ContactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTableViewCell.swift; sourceTree = "<group>"; };
 		A6642024226BDA4C008321C8 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
@@ -51,6 +54,7 @@
 		A6702169226E824400E71B26 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		A6802A29226C19A100AE0D78 /* ModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalViewController.swift; sourceTree = "<group>"; };
 		A692DCC4227BD743005BB5D3 /* RegisterMVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterMVC.swift; sourceTree = "<group>"; };
+		A695D31D227D5E04008BFE1E /* MyVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyVariables.swift; sourceTree = "<group>"; };
 		D7DDEFCBC54FBDC442C6CCED /* Pods-hack.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hack.debug.xcconfig"; path = "Target Support Files/Pods-hack/Pods-hack.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -90,6 +94,7 @@
 				698C0B5F226A7F050084819F /* AppDelegate.swift */,
 				A66D6FC32277E94300A72186 /* NetworkManager.swift */,
 				A616A67E227A2EF700AC0474 /* User.swift */,
+				A61AE498227E214800533258 /* PostBackend.swift */,
 				A6471138227A8461007E04EF /* Login */,
 				A647113A227A8492007E04EF /* FirstVC */,
 				A647113C227A84C7007E04EF /* SecondVC */,
@@ -105,6 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				69105F5B2273877E00FF303E /* LoginViewController.swift */,
+				A695D31D227D5E04008BFE1E /* MyVariables.swift */,
 				A692DCC4227BD743005BB5D3 /* RegisterMVC.swift */,
 			);
 			path = Login;
@@ -288,9 +294,11 @@
 				A692DCC5227BD743005BB5D3 /* RegisterMVC.swift in Sources */,
 				A6802A2A226C19A100AE0D78 /* ModalViewController.swift in Sources */,
 				A616A67F227A2EF700AC0474 /* User.swift in Sources */,
+				A61AE499227E214800533258 /* PostBackend.swift in Sources */,
 				A6642025226BDA4C008321C8 /* DetailViewController.swift in Sources */,
 				A670216A226E824400E71B26 /* Post.swift in Sources */,
 				A66D6FC42277E94400A72186 /* NetworkManager.swift in Sources */,
+				A695D31E227D5E04008BFE1E /* MyVariables.swift in Sources */,
 				69105F5C2273877E00FF303E /* LoginViewController.swift in Sources */,
 				69105F64227690AC00FF303E /* SecondModalViewController.swift in Sources */,
 				69105F602274F9FA00FF303E /* SecretTextCollectionViewCell.swift in Sources */,

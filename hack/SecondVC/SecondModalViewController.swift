@@ -67,13 +67,14 @@ class SecondModalViewController: UIViewController {
     
     @objc func dismissAndSaveContent(){
         if let postText = newPostTextView.text, postText != "" {
-            //delegate!.addNewpost(to: postText)
+            delegate!.addNewpost(to: postText)
             
             //---------------- New -------------------------------------
-            NetworkManager.createPost(user: MyVariables.user_id!) { user in
-                if user != nil {
-                    MyVariables.user_id = user?.user_id
-                    print("User with user_id \(user?.user_id ?? -1) just posted!")
+            print(MyVariables.user_id)
+            NetworkManager.createPost(user: MyVariables.user_id!, text:postText) { user in
+                if user != nil  {
+                    //delegate!.addNewpost(to: PostBackend.data.text)
+                    print("User just posted!")
                     let tabBarViewController = TabBarViewController()
                     self.navigationController?.pushViewController(tabBarViewController, animated: true)
                 } else {
@@ -84,7 +85,6 @@ class SecondModalViewController: UIViewController {
             
             //-------------------------------------------------------------
                 self.dismiss(animated: true, completion: nil)
-            _ = navigationController?.popViewController(animated: true)
         }
     
         
