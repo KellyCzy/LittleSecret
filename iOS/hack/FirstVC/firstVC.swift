@@ -42,8 +42,17 @@ class firstVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     override func viewDidLoad(){
         super.viewDidLoad()
         view.backgroundColor = .white
+<<<<<<< HEAD:iOS/hack/FirstVC/firstVC.swift
         self.title = "Contacts"
         self.navigationController?.setNavigationBarHidden(false, animated: false)
+=======
+        
+        let A = Person(name: "Kelly", email: "301", image: "Kelly")
+        let B = Person(name: "Chengyin", email: "111", image: "f1")
+        let C = Person(name: "Wenyi",email: "11w", image: "friend")
+        let D = Person(name: "Qiaohan", email: "hq24", image:"f2")
+        persons = [A, B, C, D]
+>>>>>>> f9ef2b58c6f1fd50027e66cddc3083d137a64ad8:hack/FirstVC/firstVC.swift
         
         tableView = UITableView(frame: .zero)
         tableView.translatesAutoresizingMaskIntoConstraints = false

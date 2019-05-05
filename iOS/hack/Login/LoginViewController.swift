@@ -107,17 +107,24 @@ class LoginViewController: UIViewController {
     
     func login(email: String, password: String, completion: @escaping () -> Void) {
         NetworkManager.login(email: email, password: password) { user in
-            if user != nil {
+            if  user != nil {
                 print("User with user_id \(user?.user_id ?? -1) logged in!")
                 let tabBarViewController = TabBarViewController()
                 self.tabBarVC = tabBarViewController
                 self.navigationController?.pushViewController(tabBarViewController, animated: true)
+<<<<<<< HEAD:iOS/hack/Login/LoginViewController.swift
+=======
+                
+>>>>>>> f9ef2b58c6f1fd50027e66cddc3083d137a64ad8:hack/Login/LoginViewController.swift
                 tabBarViewController.email = email
                 tabBarViewController.password = password
                 if let id = user?.user_id {
                     tabBarViewController.idNumber = String(id)
                     MyVariables.user_id = id
+<<<<<<< HEAD:iOS/hack/Login/LoginViewController.swift
                     completion()
+=======
+>>>>>>> f9ef2b58c6f1fd50027e66cddc3083d137a64ad8:hack/Login/LoginViewController.swift
                     print("\(tabBarViewController.email ?? "email") and \(tabBarViewController.idNumber ?? "id")")
                 }
             } else {
@@ -149,7 +156,7 @@ class LoginViewController: UIViewController {
         NSLayoutConstraint.activate([
             welcome.topAnchor.constraint(equalTo: usernameLabel.topAnchor, constant: -250),
             welcome.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            welcome.heightAnchor.constraint(equalToConstant: 200),
+            welcome.heightAnchor.constraint(equalToConstant: 250),
             welcome.widthAnchor.constraint(equalToConstant: 400)
             ])
         
@@ -175,7 +182,11 @@ class LoginViewController: UIViewController {
             ])
        
         NSLayoutConstraint.activate([
+<<<<<<< HEAD:iOS/hack/Login/LoginViewController.swift
             usernameTextField.leadingAnchor.constraint(equalTo: usernameLabel.trailingAnchor, constant :4),
+=======
+            usernameTextField.leadingAnchor.constraint(equalTo: usernameLabel.trailingAnchor, constant:4),
+>>>>>>> f9ef2b58c6f1fd50027e66cddc3083d137a64ad8:hack/Login/LoginViewController.swift
             usernameTextField.topAnchor.constraint(equalTo: usernameLabel.topAnchor, constant: labelHeight/5),
             usernameTextField.heightAnchor.constraint(equalToConstant: textFieldHeight),
             usernameTextField.widthAnchor.constraint(equalToConstant: textFieldWidth)
