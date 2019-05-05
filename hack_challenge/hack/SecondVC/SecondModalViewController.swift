@@ -71,12 +71,6 @@ class SecondModalViewController: UIViewController {
     @objc func dismissAndSaveContent(){
         if let postText = newPostTextView.text, postText != "" {
             delegate!.addNewpost(to: postText)
-<<<<<<< HEAD:iOS/hack/SecondVC/SecondModalViewController.swift
-=======
-            
-            //---------------- New -------------------------------------
-            print(MyVariables.user_id)
->>>>>>> f9ef2b58c6f1fd50027e66cddc3083d137a64ad8:hack/SecondVC/SecondModalViewController.swift
             NetworkManager.createPost(user: MyVariables.user_id!, text:postText) { user in
                 if user != nil  {
                     //delegate!.addNewpost(to: PostBackend.data.text)
@@ -88,13 +82,7 @@ class SecondModalViewController: UIViewController {
                     self.present(alert, animated: true, completion: nil)
                 }
             }
-<<<<<<< HEAD:iOS/hack/SecondVC/SecondModalViewController.swift
             self.dismiss(animated: true, completion: nil)
-=======
-            
-            //-------------------------------------------------------------
-                self.dismiss(animated: true, completion: nil)
->>>>>>> f9ef2b58c6f1fd50027e66cddc3083d137a64ad8:hack/SecondVC/SecondModalViewController.swift
         }
     
         

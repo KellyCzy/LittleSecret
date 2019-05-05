@@ -84,7 +84,6 @@ class ModalViewController: UIViewController {
             saveButton.backgroundColor = UIColor(red: 46/255, green: 150/255, blue: 87/255, alpha: 1)
             saveButton.layer.cornerRadius = 10
             saveButton.addTarget(self, action: #selector(dismissAndSaveContact), for: .touchUpInside)
-            saveButton.backgroundColor = UIColor(red: 46/255, green: 150/255, blue: 87/255, alpha: 1)
             view.addSubview(saveButton)
             
             cancelButton = UIButton()
@@ -93,14 +92,12 @@ class ModalViewController: UIViewController {
             cancelButton.layer.cornerRadius = 10
              cancelButton.backgroundColor = UIColor(red:255/255, green: 127/255, blue:80/255, alpha: 1)
             cancelButton.addTarget(self, action: #selector(dismissMVC), for: .touchUpInside)
-            cancelButton.backgroundColor = UIColor(red:255/255, green: 127/255, blue:80/255, alpha: 1)
             view.addSubview(cancelButton)
             
             
             setupConstraints()
         }
     
-<<<<<<< HEAD:iOS/hack/FirstVC/ModalViewController.swift
 //    func addFriend(email: String) {
 //        NetworkManager.addFriend(user: MyVariables.user_id ?? -1, email: email){ user in
 //            if email != nil {
@@ -113,20 +110,6 @@ class ModalViewController: UIViewController {
 //            self.dismiss(animated: true, completion: nil)
 //        }
 //    }
-=======
-    func addFriend(email: String) {
-        NetworkManager.addFriend(user: MyVariables.user_id ?? -1, email: email){ user in
-            if email != nil {
-                print("User wants to add friend")
-                self.dismissAndSaveContact()
-            } else {
-                let alert = UIAlertController(title: "Alert", message: "Invalid Login Information", preferredStyle: .alert)
-                self.present(alert, animated: true, completion: nil)
-            }
-            self.dismiss(animated: true, completion: nil)
-        }
-    }
->>>>>>> f9ef2b58c6f1fd50027e66cddc3083d137a64ad8:hack/FirstVC/ModalViewController.swift
         
         @objc func dismissAndSaveContact(){
 //            if nameTextField.text != "Enter a name"{

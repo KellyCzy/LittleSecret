@@ -22,11 +22,7 @@
 		698C0B76226A92850084819F /* secondVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698C0B75226A92850084819F /* secondVC.swift */; };
 		698C0B78226A92980084819F /* thirdVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698C0B77226A92980084819F /* thirdVC.swift */; };
 		A616A67F227A2EF700AC0474 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A616A67E227A2EF700AC0474 /* User.swift */; };
-<<<<<<< HEAD:iOS/hack.xcodeproj/project.pbxproj
 		A61AE499227E214800533258 /* PostArrayBackend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61AE498227E214800533258 /* PostArrayBackend.swift */; };
-=======
-		A61AE499227E214800533258 /* PostBackend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61AE498227E214800533258 /* PostBackend.swift */; };
->>>>>>> f9ef2b58c6f1fd50027e66cddc3083d137a64ad8:hack.xcodeproj/project.pbxproj
 		A6642021226BD3B9008321C8 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6642020226BD3B9008321C8 /* Person.swift */; };
 		A6642023226BD499008321C8 /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6642022226BD499008321C8 /* ContactTableViewCell.swift */; };
 		A6642025226BDA4C008321C8 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6642024226BDA4C008321C8 /* DetailViewController.swift */; };
@@ -56,11 +52,7 @@
 		698C0B77226A92980084819F /* thirdVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = thirdVC.swift; sourceTree = "<group>"; };
 		9C5CB6A5D993804C7BA392E4 /* Pods_hack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A616A67E227A2EF700AC0474 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-<<<<<<< HEAD:iOS/hack.xcodeproj/project.pbxproj
 		A61AE498227E214800533258 /* PostArrayBackend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostArrayBackend.swift; sourceTree = "<group>"; };
-=======
-		A61AE498227E214800533258 /* PostBackend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostBackend.swift; sourceTree = "<group>"; };
->>>>>>> f9ef2b58c6f1fd50027e66cddc3083d137a64ad8:hack.xcodeproj/project.pbxproj
 		A6642020226BD3B9008321C8 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		A6642022226BD499008321C8 /* ContactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTableViewCell.swift; sourceTree = "<group>"; };
 		A6642024226BDA4C008321C8 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
@@ -110,11 +102,7 @@
 				6926AC65227F995C005472B4 /* FriendRequest.swift */,
 				6926AC61227E7F99005472B4 /* Friends.swift */,
 				A616A67E227A2EF700AC0474 /* User.swift */,
-<<<<<<< HEAD:iOS/hack.xcodeproj/project.pbxproj
 				A61AE498227E214800533258 /* PostArrayBackend.swift */,
-=======
-				A61AE498227E214800533258 /* PostBackend.swift */,
->>>>>>> f9ef2b58c6f1fd50027e66cddc3083d137a64ad8:hack.xcodeproj/project.pbxproj
 				A6471138227A8461007E04EF /* Login */,
 				A647113A227A8492007E04EF /* FirstVC */,
 				A647113C227A84C7007E04EF /* SecondVC */,
@@ -316,11 +304,7 @@
 				A692DCC5227BD743005BB5D3 /* RegisterMVC.swift in Sources */,
 				A6802A2A226C19A100AE0D78 /* ModalViewController.swift in Sources */,
 				A616A67F227A2EF700AC0474 /* User.swift in Sources */,
-<<<<<<< HEAD:iOS/hack.xcodeproj/project.pbxproj
 				A61AE499227E214800533258 /* PostArrayBackend.swift in Sources */,
-=======
-				A61AE499227E214800533258 /* PostBackend.swift in Sources */,
->>>>>>> f9ef2b58c6f1fd50027e66cddc3083d137a64ad8:hack.xcodeproj/project.pbxproj
 				A6642025226BDA4C008321C8 /* DetailViewController.swift in Sources */,
 				6926AC64227F8CD7005472B4 /* RequestFriendsViewController.swift in Sources */,
 				A670216A226E824400E71B26 /* Post.swift in Sources */,
