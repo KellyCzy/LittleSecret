@@ -1,13 +1,38 @@
 # Little Secret API Specification
 Endpoint: http://34.74.44.203/
 
+## Data already created in databse
+    user1 = User(id = 1, email='wg225@cornell.edu', password='1234')
+    user2 = User(id = 2, email='hq45@cornell.edu', password='1234')
+    user3 = User(id = 3, email='zc96@cornell.edu', password='5678')
+    user4 = User(id = 4, email='cnt26@cornell.edu', password='5678')
+    
+    post1 = Post(text = "User 1 first post", user_id = 1)
+    post2 = Post(text = "User 2 first post", user_id = 2)
+    post3 = Post(text = "User 3 first post", user_id = 3)
+    post4 = Post(text = "User 4 first post", user_id = 4)
+    
+    relation1 = Friendship(user_1_id=1, user_2_id=2, status =2, action_user=2)
+    relation2 = Friendship(user_1_id=1, user_2_id=3, status =2, action_user=3)
+    relation3 = Friendship(user_1_id=1, user_2_id=4, status =1, action_user=1)
+    
+
+User 1 sends friend request to user 2, user 3, and they accept and become friends. (relation.status = 2(‘accepted’))
+User 1 sends a friend request to user 4 but user 4 is not responsed yet. (relation.status = 1(‘pending’))
+
+
+1. The app can be tested  by logging in into user 1 account and see user 2 and user 3's posts. 
+2. The app can then tested by logging in into user 4 account and see pending friend request from user 1.
+3. Each user can see his/her own posts in personal information page.
+
+
 ## Home Page
 
 *Request:* `GET` `/`
 *Response:*
 
     {"message": "Hello, World!"}
-## Register a user
+    Register a user
 
 *Request:* `POST` ```/register``/`
 Post body:
@@ -45,7 +70,7 @@ Post body:
     }
 ## Send a friend request
 
-*Request:* **`POST` ```/friend/request/<int:requester_id>/<int:requested_id>``/`
+*Request:* **`POST` ```/friend/request/<int:requester_id>/<requested_email>``/`
 *Respons**e**:*
 
     {
@@ -82,11 +107,35 @@ Post body:
 *Response:*
 
     {
-     'friends_user_id': [1, 2, 3]
+     'friends': [
+        {'id': 1,
+        'email': "wg225@cornell.edu"},
+        {'id': 2,
+        'email': "hq45@cornell.edu"},
+      ]
+    }
+## Get a user’s request friend list
+
+*Request:* **`GET` ```/friend/request/list/<int:user_id>``/`
+*Response:*
+
+    {
+     'friends': [
+        {'id': 1,
+        'email': "wg225@cornell.edu"},
+        {'id': 2,
+        'email': "hq45@cornell.edu"},
+      ]
     }
 ## Create a post
 
-*Request:* **`POST` ```/post/<int:user>``/`
+*Request:* **`POST` ```/posts/<int:user>``/`
+Post body:
+
+    {
+      "text": "My post!"
+    }
+
 *Response:*
 
     {
@@ -99,7 +148,7 @@ Post body:
     }
 ## Delete a post
 
-*Request:* **`DELETE` ```/post/<int:post>``/`
+*Request:* **`DELETE` ```/posts/<int:post>``/`
 *Response:*
 
     {

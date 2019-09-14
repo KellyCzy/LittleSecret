@@ -62,8 +62,18 @@ def num_users():
 def friend_list(user_id):
     friend_list = []
     for i in range(0, num_users()+1):
+        user = User.query.filter(User.id==i).first()
         if (check_friendship(i, user_id)):
-            friend_list.append(i) # add the user to user_id's friendlist
+            friend_list.append(user) # add the user to user_id's friendlist
+    return friend_list
+
+def request_friend_list(user_id):
+    friend_list = []
+    for i in range(0, num_users()+1):
+        user = User.query.filter(User.id==i).first()
+        relation = get_relationship(user_id, i)
+        if relation is not None and relation.status == 1 and relation.action_user == i:
+            friend_list.append(user)
     return friend_list
 
     
